@@ -1,23 +1,25 @@
 <!DOCTYPE html >
   <html lang="en">
     <head>
-      <%- include('../partials/head'); %>
+      <%- await include('../partials/head'); %>
     </head>
     <body class="container">
 
       <header>
-        <%- include('../partials/header'); %>
+        <%- await include('../partials/header'); %>
       </header>
 
       <main>
         <div class="jumbotron">
           <h1>This is great</h1>
           <p>Welcome to templating using EJS</p>
+          <br>
+          <%= `<div>Test</div>`  %>
         </div>
       </main>
 
       <footer>
-        <%- include('../partials/footer'); %>
+        <%- await include('../partials/footer'); %>
       </footer>
 
     </body>

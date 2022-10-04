@@ -1,11 +1,16 @@
 const express = require("express");
+const ejs = require("ejs");
+const path = require("path");
 
 const router = express.Router();
 
 const productControllers = require("./controllers/productControllers");
 
-router.get("/", (req, res) => {
-  res.render("pages/index");
+router.get("/", async (req, res) => {
+  const html = await ejs.renderFile(
+    path.join(__dirname, "./views/pages/index.ejs"), {}, {async: true});
+  res.send(html);
+  // res.renderFile("pages/index", );
 });
 
 router.get("/products", productControllers.browse);
