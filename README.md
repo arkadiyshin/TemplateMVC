@@ -33,10 +33,10 @@ If you develop on Windows, you should edit you git configuration to change your 
 An example (a basic list of items) is provided (you can load the _database.sql_ file in a test database). The accessible URLs are :
 
 - Home page: [GET localhost:5000/](localhost:5000/)
-- Item browse: [GET localhost:5000/items](localhost:5000/items)
-- Item read: [GET localhost:5000/items/:id](localhost:5000/items/2)
-- Item edit: PUT localhost:5000/items/:id
-- Item add: POST localhost:5000/items
-- Item deletion: DELETE localhost:5000/items/:id
+- Product browse: [GET localhost:5000/products](localhost:5000/products)
+- Product read: [GET localhost:5000/products/:id](localhost:5000/products/2)
+- Product edit: PUT localhost:5000/products/:id
+- Product add: POST localhost:5000/products
+- Product deletion: DELETE localhost:5000/products/:id
 
 You can find all these routes declared in the file `src/router.js`. You can add your own new routes, controllers and models.
