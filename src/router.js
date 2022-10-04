@@ -1,6 +1,7 @@
 const express = require("express");
 const ejs = require("ejs");
 const path = require("path");
+const models = require("./models");
 
 const router = express.Router();
 
@@ -8,9 +9,9 @@ const productControllers = require("./controllers/productControllers");
 
 router.get("/", async (req, res) => {
   const html = await ejs.renderFile(
-    path.join(__dirname, "./views/pages/index.ejs"), {}, {async: true});
+    path.join(__dirname, "./views/pages/index.ejs"),
+    { models }, { async: true });
   res.send(html);
-  // res.renderFile("pages/index", );
 });
 
 router.get("/products", productControllers.browse);

@@ -11,10 +11,70 @@
 
       <main>
         <div class="jumbotron">
-          <h1>This is great</h1>
-          <p>Welcome to templating using EJS</p>
+          <h1>List of Products</h1>
+          <p>This is the View part of the MVC application is implemented using <abbr 
+            title="Embedded Javascript templates is a way to use JS to generate parts of an HTML file, called a template">EJS</abbr>.</p>
           <br>
-          <%= `<div>Test</div>`  %>
+          <blockquote style="margin-left: 2em; padding: 1em; 
+            border: solid 1px white; border-radius: 0.5em;
+            background-color: white;">
+            <dl>
+              <%- (await models.products.findAll())[0].reduce((result, product) => {
+                return `${result}
+                  <dt style="clear: both">${product.title}</dt>
+                  <dd>
+                    <figure style="float: right"><img alt="${product.rate}/5" src="${product.image}"
+                      style="max-height: 175px; max-width: 250px"></figure>
+                    ${product.description}
+                  </dd>`;
+              }, ''); %>
+            </dl>
+            <p style="clear: both">For the full list of fields check <a target="_blank"
+              href="/products">http://localhost:*/products</a></p>
+          </blockquote>
+
+          <h1>Useful readings</h1>
+          <ul>
+            <li>
+              <a target="_blank" 
+                href="https://docs.google.com/presentation/d/14hWE939kyjfw3hiOHr8LDwC08pySiXtsGTKkX8tpxGg/edit?usp=sharing">
+                MVC</a>: The Model-View-Controller design pattern, or MVC for short, is a common design used by software developers.
+                It requires breaking the application into three distinct components, the Model component, the View component, and
+                the Controller component.
+            </li>
+            <li>
+              <a target="_blank"
+                href="https://onecompiler.com/cheatsheets/ejs-embedded-javascript-templates">
+                EJS</a>: Embedded Javascript templates are a way to use JS to generate parts of an HTML file, called a template. Such
+                files usually end with the extention "ejs" which stands for Embedded JavaScript.
+            </li>
+            <li><a target="_blank" 
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">Array.prototype.reduce</a>: 
+              is a function used to generate a single entity out of an array in Javascript. Used in the "models/index.js" file to
+              generate a dictionary (i.e. an object) containing keys for each one of the tables (i.e. the <emph>models</emph> object)
+              in the database.
+            </li>
+            <li><a target="_blank" 
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread syntax (...) in Javascript</a>:
+              Used by the reduce function call above to accumulate the results from all the tables in the database into a single object
+              (i.e. the models object).
+            </li>
+            <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names">Computed property named ([property]) in Javascript</a>:
+              This feature is used to create a key in the models object with the same name as the table, which is obtained from a string variable.
+            </li>
+            <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">The Proxy object in Javascript</a>:
+              This standard object is used in the "models/index.js" file to generate custom error messages when the models object is indexed using
+              a non-existent table name. Namely, the error message "models.table is not defined. Did you create tableManager.js" is emitted when
+              this happens to alert the programmer to the need to create a "Model" class for the table.
+            </li>
+            <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator">The (??) operator in Javascript</a>:
+              This very useful operator is used in the "index.js" file to choose between the APP_PORT environmental variable and a fixed value of 5000, based on whether an environmental
+              variable with the name "APP_PORT" was defined in the ".env" file (for more information on the "dotend" package, please check 
+              <a target="_blank" href="https://www.npmjs.com/package/dotenv">this link</a>).
+            </li>
+            <li><a href="https://stackoverflow.com/questions/60203249/ejs-async-true-with-node-express" target="_blank">Using Await in EJS files</a>: 
+              Check the linked answer on stackoverflow.</li>
+          </ul>
         </div>
       </main>
 
