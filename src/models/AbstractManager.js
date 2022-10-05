@@ -1,6 +1,7 @@
 class AbstractManager {
-  constructor({ table }) {
+  constructor({ table, lastUpdate }) {
     this.table = table;
+    this.lastUpdate = lastUpdate;
   }
 
   find(id) {
@@ -14,6 +15,7 @@ class AbstractManager {
   }
 
   delete(id) {
+    this.lastUpdate = new Date();
     return this.connection.query(`delete from ${this.table} where id = ?`, [
       id,
     ]);

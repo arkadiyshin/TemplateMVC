@@ -11,28 +11,16 @@
 
       <main>
         <div class="jumbotron">
-          <h1>List of Products</h1>
-          <p>This is the View part of the MVC application is implemented using <abbr 
-            title="Embedded Javascript templates is a way to use JS to generate parts of an HTML file, called a template">EJS</abbr>.</p>
-          <br>
-          <blockquote style="margin-left: 2em; padding: 1em; 
-            border: solid 1px white; border-radius: 0.5em;
-            background-color: white;">
-            <dl>
-              <%- (await models.products.findAll())[0].reduce((result, product) => {
-                return `${result}
-                  <dt style="clear: both">${product.title}</dt>
-                  <dd>
-                    <figure style="float: right"><img alt="${product.rate}/5" src="${product.image}"
-                      style="max-height: 175px; max-width: 250px"></figure>
-                    ${product.description}
-                  </dd>`;
-              }, ''); %>
-            </dl>
-            <p style="clear: both">For the full list of fields check <a target="_blank"
-              href="/products">http://localhost:*/products</a></p>
-          </blockquote>
-
+          <h1>This is great</h1>
+          <p>Welcome to templating using EJS</p>
+          <ul>
+            <li>
+              <a href="/categories"> Categories </a>
+            </li>
+            <li>
+              <a href="/products"> Products </a>
+            </li>
+          </ul> 
           <h1>Useful readings</h1>
           <ul>
             <li>

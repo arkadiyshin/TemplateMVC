@@ -1,16 +1,12 @@
 const models = require("../models");
 const View = require("../views/View");
 
-const home = (req, res) => {
-  view = new View(res, 'index.ejs');
-  view.render();
-};
 
 const browse = (req, res) => {
-  models.products
+  models.categories
     .findAll()
     .then(([rows]) => {
-      view = new View(res, 'products.ejs');
+      view = new View(res, 'categories.ejs');
       view.render(rows);
     })
     .catch((err) => {
@@ -20,13 +16,13 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.products
+  models.categories
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
       } else {
-        view = new View(res, 'products.ejs');
+        view = new View(res, 'categories.ejs');
         view.render(rows);
       }
     })
@@ -43,7 +39,7 @@ const edit = (req, res) => {
 
   item.id = parseInt(req.params.id, 10);
 
-  models.products
+  models.categories
     .update(item)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -63,10 +59,10 @@ const add = (req, res) => {
 
   // TODO validations (length, format...)
 
-  models.products
+  models.categories
     .insert(item)
     .then(([result]) => {
-      res.location(`/products/${result.insertId}`).sendStatus(201);
+      res.location(`/categories/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -75,7 +71,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.products
+  models.categories
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -91,7 +87,6 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  home,
   browse,
   read,
   edit,

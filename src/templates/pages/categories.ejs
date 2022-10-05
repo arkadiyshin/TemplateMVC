@@ -1,0 +1,39 @@
+<!DOCTYPE html >
+  <html lang="en">
+    <head>
+      <%- await include('../partials/head'); %>
+    </head>
+    <body class="container">
+
+      <header>
+        <%- await include('../partials/header'); %>
+      </header>
+
+      <main>
+        <div class="jumbotron">
+          <h1>List of Categories</h1>
+          <p>This is the View part of the MVC application is implemented using <abbr 
+            title="Embedded Javascript templates is a way to use JS to generate parts of an HTML file, called a template">EJS</abbr>.</p>
+          <br>
+          <blockquote style="margin-left: 2em; padding: 1em; 
+            border: solid 1px white; border-radius: 0.5em;
+            background-color: white;">
+            <dl>
+              <%- data.reduce((result, category) => { 
+                return `${result}
+                  <dt style="clear: both">${category.id}</dt>
+                  <dd>
+                    ${category.label}
+                  </dd>`;
+              }, ''); %>
+            </dl>
+          </blockquote>
+        </div>
+      </main>
+
+      <footer>
+        <%- await include('../partials/footer'); %>
+      </footer>
+
+    </body>
+  </html>
