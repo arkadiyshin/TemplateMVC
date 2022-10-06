@@ -2,16 +2,14 @@ const models = require("../models");
 const View = require("../views/View");
 
 const home = (req, res) => {
-  view = new View(res, 'index.ejs');
-  view.render();
+  new View(res, 'index.ejs').renderView();
 };
 
 const browse = (req, res) => {
   models.products
     .findAll()
     .then(([rows]) => {
-      view = new View(res, 'products.ejs');
-      view.render(rows);
+      new View(res, 'products.ejs').renderView(rows);
     })
     .catch((err) => {
       console.error(err);
@@ -26,8 +24,7 @@ const read = (req, res) => {
       if (rows[0] == null) {
         res.sendStatus(404);
       } else {
-        view = new View(res, 'products.ejs');
-        view.render(rows);
+        new View(res, 'products.ejs').renderView(rows);
       }
     })
     .catch((err) => {
@@ -49,6 +46,7 @@ const edit = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
+        new View(res, 'products.ejs').updateViewFromModel(models.products, 'find', req.params.id);
         res.sendStatus(204);
       }
     })
@@ -66,6 +64,7 @@ const add = (req, res) => {
   models.products
     .insert(item)
     .then(([result]) => {
+      new View(res, 'products.ejs').updateViewFromModel(models.products, 'find', result.insertId);
       res.location(`/products/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
@@ -81,6 +80,7 @@ const destroy = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
+        new View(res, 'products.ejs').deleteCache();
         res.sendStatus(204);
       }
     })
